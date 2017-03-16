@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="container">
+
+    <div data-hook="taxon_sidebar_navigation" class="content-sidebar">
+      <%= render partial: 'spree/shared/lookbook_taxonomies' %>
+    </div>
+
+
+    <div data-hook="taxon_products" class="content-page products">
+      <%= render partial: 'spree/shared/kit', locals: { kit: @lookbook.kits.first} %>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<tr id="<%= spree_dom_id product %>" >
+  <% line_id = (defined? skp )? skp : rand(500..500000) %>
+  <td class="handle move-handle"><span class="icon icon-move handle"></span></td>
+
+
+  <td>
+  <% if defined? skp %>
+      <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][id]", skp.id %>
+
+<% end %>
+  <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][spree_product_id]", product.id %>
+  <%= product.product_code %>
+</td>
+<td>
+  <%= product.name %>
+
+</td>
+
+  <td>
+    <% if (defined? skp) && skp.image %>
+         <%= image_tag skp.image.url(:mini) %>
+    <% end %>
+    <div class="panel-body">
+      <%= file_field_tag "kit[spree_kits_products_attributes][#{line_id}][image]" , class: 'form-control', rows: 4 %>
+    </div>
+  </td>
+</tr>

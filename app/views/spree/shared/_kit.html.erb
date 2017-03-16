@@ -1,0 +1,48 @@
+
+
+<%= image_tag "noimage/large.png", {class: 'deferred_img section_header_banner', data:{original: kit.image.url(:large) } } %>
+
+
+<%
+   paginated_products = kit.products.page(params[:page]).per(12)
+%>
+
+<% if paginated_products.any? %>
+    <div id="products" class="products-list clear">
+      <% paginated_products.each do |product| %>
+          <% url = spree.product_path(product) %>
+          <div id="product_<%= product.id %>" class="products-list__single <%= cycle("alpha", "secondary", "", "omega secondary", :name => "classes") %>" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
+            <% cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : [I18n.locale, current_currency, product]) do %>
+                <div class="thumb clear">
+                  <%= link_to t("taxons.preview"), url, class: 'btn_quickview' %>
+                  <%= link_to image_tag(kit.image_for(product), {:itemprop => "image", :lazy => true}), url, :itemprop => 'url', :class => 'link' %>
+                </div>
+                <h3><%= link_to truncate(product.name, :length => 50), url, :class => 'info', :itemprop => "name", :title => product.name %></h3>
+
+                <% if product.on_sale? %>
+                    <div class="price">
+                      <span class="old-price"><%= display_original_price(product) %></span>
+                      <span class="sale-price"><%= display_price(product) %></span>
+                    </div>
+                <% else %>
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                      <span class="price" itemprop="price"><%= display_price(product) %></span>
+                    </div>
+                <% end %>
+
+
+            <% end %>
+          </div>
+      <% end %>
+      <% reset_cycle("classes") %>
+
+      <% if paginated_products.respond_to?(:num_pages) %>
+          <%= paginate paginated_products %>
+      <% end %>
+
+    </div>
+
+<% end %>
+
+
+

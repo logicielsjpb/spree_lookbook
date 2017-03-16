@@ -1,0 +1,16 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:editing_resource, resource: plural_resource_name(Spree::Lookbook)) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:add_kit, scope: :kit), spree.new_admin_lookbook_kit_path(@lookbook), icon: 'add', class: 'btn-success', id: 'new_lookbook_link' %>
+<% end %>
+
+<%= render 'form', resource: @lookbook %>
+
+<% SpreeI18n::Config.available_locales.each do |locale| %>
+    <img src ="<%= @lookbook.image(locale).url %>"/>
+<% end %>
+
+
+

@@ -1,0 +1,41 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:lookbooks) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <span id="new_ot_link">
+      <%= button_link_to Spree.t(:new_lookbook), spree.new_admin_lookbook_path, { :icon => 'SS', :id => 'admin_new_lookbook', :class => 'btn-success' } %>
+    </span>
+<% end %>
+
+
+<% if @lookbooks.any? %>
+
+    <table class="table sortable" id="listing-store-locations data-hook">
+      <thead>
+      <tr data-hook="option_header">
+        <th><%= Spree.t(:lookbook) %></th>
+        <th class="actions"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @lookbooks.each do |lookbook| %>
+          <tr id="<%= spree_dom_id lookbook %>">
+            <td class="presentation"><%= lookbook.name %></td>
+            <td class="actions actions-2 text-right">
+              <%= link_to_edit(lookbook.id, class: 'admin_edit_option_type', no_text: true) %>
+              <%= link_to_delete(lookbook, no_text: true) %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% else %>
+    <div class="alert alert-info no-objects-found">
+      <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::SizingChart)) %>,
+      <%= link_to Spree.t(:add_one), new_admin_lookbook_path %>!
+    </div>
+<% end %>
+
+

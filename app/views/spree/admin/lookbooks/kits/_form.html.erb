@@ -1,0 +1,87 @@
+<div data-hook="admin_inside_kits_form">
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.field_container :name, class: ['form-group'] do %>
+          <%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
+          <%= f.text_field  :name, :class => 'form-control' %>
+          <%= error_message_on :kit, :name, :class => 'error-message' %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+          <%= f.label :image, Spree.t('product_rule.choose_products') %> <span class="required">*</span>
+          <%= f.file_field :image %>
+    </div>
+  </div>
+  <div class="row">
+
+      <div class="col-md-12">
+        <%= f.field_container :product_ids, class: ['form-group'] do %>
+            <%= f.label :product_ids, Spree.t('product_rule.choose_products') %> <span class="required">*</span>
+            <%= hidden_field_tag :product_id, "", class: "product_picker", data: {
+                                                    url: "/admin/lookbooks/kits/add_product",
+                                                    remote: true }
+            %>
+            <%= error_message_on :kit, :product_ids, :class => 'error-message' %>
+        <% end %>
+      </div>
+  </div>
+
+  <% if f.object.persisted? %>
+
+  <table class="table sortable" id = "product_table"  data-sortable-link="<%= admin_lookbook_kit_update_product_position_path(@lookbook, @lookbooks_kit) %>">
+    <tr>
+      <th class="no-border"></th>
+
+
+      <th>
+        <%= Spree.t("product_id") %>
+      </th>
+      <th>
+        <%= Spree.t("product_name") %>
+      </th>
+      <th>
+        <%= Spree.t("product_image") %>
+      </th>
+
+    </tr>
+    <% @lookbooks_kit.spree_kits_products.each do |skp| %>
+        <% puts skp.product.inspect %>
+        <%= render "product_line", {product: skp.product, skp: skp} %>
+    <% end %>
+
+
+  </table>
+
+      <div class ='translationDiv'>
+        <%= link_to_with_icon 'translate', nil, admin_translations_path('kits', f.object.id), title: Spree.t(:'i18n.translations'), class: 'btn btn-sm btn-primary' %>
+      </div>
+  <% else %>
+      <table class="table" id = "product_table" >
+        <tr>
+          <th class="no-border"></th>
+
+
+          <th>
+            <%= Spree.t("product_id") %>
+          </th>
+          <th>
+            <%= Spree.t("product_name") %>
+          </th>
+          <th>
+            <%= Spree.t("product_image") %>
+          </th>
+
+        </tr>
+        <% @lookbooks_kit.spree_kits_products.each do |skp| %>
+            <% puts skp.product.inspect %>
+            <%= render "product_line", {product: skp.product, skp: skp} %>
+        <% end %>
+
+
+      </table>
+  <% end %>
+
+
+</div>
+

@@ -1,0 +1,48 @@
+<div data-hook="admin_inside_kits_form">
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.field_container :name, class: ['form-group'] do %>
+        <%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
+        <%= text_field :kit, :name, :class => 'form-control' %>
+        <%= error_message_on :kit, :name, :class => 'error-message' %>
+      <% end %>
+    </div>
+    <div class="col-md-12">
+      <%= f.field_container :product_ids, class: ['form-group'] do %>
+        <%= f.label :product_ids, Spree.t('product_rule.choose_products') %> <span class="required">*</span>
+        <%= hidden_field_tag :product_id, "", class: "product_picker", data: {
+                                     url: "/admin/kits/add_product",
+                                     remote: true }
+        %>
+        <%= error_message_on :kit, :product_ids, :class => 'error-message' %>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table" id = "product_table">
+    <tr>
+
+      <th>
+       <%= Spree.t("product_id") %>
+      </th>
+      <th>
+        <%= Spree.t("product_name") %>
+      </th>
+    </tr>
+    <% @kit.spree_kits_products.each do |skp| %>
+        <% puts skp.product.inspect %>
+          <%= render "product_line", {product: skp.product, skp: skp} %>
+    <% end %>
+
+
+  </table>
+
+  <% if f.object.persisted? %>
+      <div class ='translationDiv'>
+        <%= link_to_with_icon 'translate', nil, admin_translations_path('kits', f.object.id), title: Spree.t(:'i18n.translations'), class: 'btn btn-sm btn-primary' %>
+      </div>
+  <% end %>
+
+
+</div>
+

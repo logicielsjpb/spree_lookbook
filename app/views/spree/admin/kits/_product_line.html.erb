@@ -1,0 +1,15 @@
+<tr>
+  <% line_id = (defined? skp )? skp : rand(500..500000) %>
+<td>
+  <% if defined? skp %>
+      <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][id]", skp.id %>
+
+<% end %>
+  <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][spree_product_id]", product.id %>
+  <%= product.product_code %>
+</td>
+<td>
+  <%= product.name %>
+
+</td>
+</tr>

@@ -1,0 +1,67 @@
+<% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:back_to_resource_list, resource: plural_resource_name(Spree::Lookbook)), spree.admin_lookbooks_path, icon: 'arrow-left', class: 'btn-primary' %>
+<% end %>
+
+<%puts resource.inspect %>
+<%= form_for [:admin, resource], multipart: true do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name, Spree::Lookbook.human_attribute_name(:name) %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <%= f.field_container :taxons, class: ['form-group'] do %>
+            <%= f.label :taxon_id, Spree.t(:taxon) %>
+
+            <% if can? :modify, Spree::Classification %>
+                <%= f.hidden_field :spree_taxon_id, value: @lookbook.spree_taxon_id, class: "taxon_picker" %>
+            <% elsif @lookbook.taxon.any? %>
+                <ul class="text_list">
+                  <%= "<li>#{@lookbook.taxon.name}</li>" %>
+                </ul>
+            <% else %>
+                <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :taxons) %></div>
+            <% end %>
+
+        <% end %>
+      </div>
+
+      <div class="col-md-12">
+        <%= f.field_container :kit_id, class: ['form-group'] do %>
+            <%= f.label :kit_id, Spree.t('choose_kit') %> <span class="required">*</span>
+            <%= hidden_field_tag :kit_id, "", class: "kit_picker", data: {
+                                                    url: "/admin/lookbooks/add_kit",
+                                                    remote: true }
+            %>
+            <%= error_message_on :kit, :product_ids, :class => 'error-message' %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render "spree/admin/shared/#{resource.new_record? ? 'new' : 'edit'}_resource_links" %>
+    <% if f.object.persisted? %>
+        <div class ='translationDiv'>
+          <%= link_to_with_icon 'translate', nil, admin_translations_path('lookbook', f.object.id), title: Spree.t(:'i18n.translations'), class: 'btn btn-sm btn-primary' %>
+        </div>
+    <% end %>
+
+    <% if @lookbook.kits.any? %>
+
+        <table class="table sortable" id="listing-kits" data-sortable-link="<%= update_positions_admin_lookbook_kits_path(@lookbook) %>">
+          <thead>
+          <tr data-hook="option_header">
+            <th class="no-border"></th>
+            <th><%= Spree.t(:kit) %></th>
+            <th class="actions"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @lookbook.spree_kits_lookbooks.each do |skl| %>
+              <%= render "kit_line", {kit: skl.kit, skl: skl} %>
+          <% end %>
+          </tbody>
+        </table>
+    <% end %>
+<% end %>

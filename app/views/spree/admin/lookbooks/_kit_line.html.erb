@@ -1,0 +1,18 @@
+<tr id="<%= spree_dom_id kit %>">
+  <% line_id = (defined? skl )? skl.id : rand(500..500000) %>
+  <% if defined? skl %>
+      <%= hidden_field_tag "lookbook[spree_kits_lookbooks_attributes][#{line_id}][id]", skl.id %>
+
+  <% end %>
+  <%= hidden_field_tag "lookbook[spree_kits_lookbooks_attributes][#{line_id}][kit_id]", kit.id %>
+  <%= hidden_field_tag "lookbook[spree_kits_lookbooks_attributes][#{line_id}][_destroy]", "false", data:{hook: "deleter"} %>
+
+  <td class="handle move-handle"><span class="icon icon-move handle"></span></td>
+  <td class="presentation"><%= kit.name %></td>
+  <td class="actions actions-2 text-right">
+    <% if @lookbook %>
+      <%= link_to_edit(kit.id, class: 'admin_edit_option_type', no_text: true, url: edit_admin_lookbook_kit_path(@lookbook, kit)) %>
+        <%= link_to_with_icon 'delete', "", "#remove_line", class: "btn btn-danger btn-sm deete-resource" %>
+    <% end %>
+  </td>
+</tr>

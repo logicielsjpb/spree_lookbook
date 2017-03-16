@@ -1,0 +1,29 @@
+<%= render 'spree/admin/shared/sub_menu/product' %>
+
+<% content_for :page_title do %>
+    <%= Spree.t(:kits_edit) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to Spree.t(:back_to_kits), spree.admin_kits_path, :icon => 'arrow-left' %>
+    </li>
+<% end %>
+
+
+
+<div id="ajax_error" class="errorExplanation" style="display:none;"></div>
+
+<%= form_for [:admin, @lookbooks_kit], url: admin_lookbook_kit_path(@lookbook, @lookbooks_kit), multipart: true do |f| %>
+
+    <%= render :partial => 'form', :locals => { :f => f } %>
+
+    <fieldset class="no-border-top">
+      <br>
+      <div class="filter-actions actions" data-hook="buttons">
+        <%= button Spree.t(:update), 'ok' %>
+      </div>
+    </fieldset>
+
+
+<% end %>

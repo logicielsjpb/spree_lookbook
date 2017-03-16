@@ -1,0 +1,7 @@
+
+<div id="accordion">
+  <% cache [I18n.locale, @taxon] do %>
+      <%= taxons_tree(@lookbook.spree_taxon.root, @lookbook.spree_taxon, 4, true) %>
+  <% end %>
+</div>
+

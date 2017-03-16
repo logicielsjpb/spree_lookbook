@@ -1,0 +1,54 @@
+<% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:back_to_resource_list, resource: Spree::Kit.model_name.human), edit_admin_kit_path(@kit), class: 'btn-primary', icon: 'arrow-left' %>
+<% end %>
+<% @resource = @kit %>
+
+<%= render 'settings' %>
+
+<div class="row translations">
+  <div class="col-md-4">
+    <%= render 'fields' %>
+  </div>
+  <div class="col-md-8">
+    <%= form_for [:admin, @resource] do |f| %>
+        <div id="attr_fields">
+          <% SpreeI18n::Config.available_locales.each do |locale| %>
+              <%= f.globalize_fields_for locale.to_sym do |g| %>
+                  <% @resource.class.translated_attribute_names.each_with_index do |attr, i| %>
+                      <div class="panel panel-default <%= attr %> <%= locale %>" style="display:<%= i == 0 ? 'auto' : 'none' %>;">
+                        <div class="panel-heading">
+                          <%= Spree.t(attr, locale: locale) %>
+
+                          <div class="pull-right text-muted">
+                            <small><i><%= Spree.t(:'i18n.this_file_language', locale: locale) %></i></small>
+
+                            <% if locale.to_s.include?('-') %>
+                                <img src="https://www.localeapp.com/assets/flags/regions/<%= locale.to_s.split('-').last %>.png">
+                            <% else %>
+                                <img src="https://www.localeapp.com/assets/flags/languages/<%= locale %>.png">
+                            <% end %>
+                          </div>
+                        </div>
+
+                        <div class="panel-body">
+                          <%# cette view la est paar défaut dans spree mais c'est actually mal faite... %>
+                          <% if @resource.translation.class.columns_hash[attr.to_s].type == :text %>
+                              <%= g.text_area attr, class: 'form-control', rows: 4 %>
+                          <% else %>
+                              <%= g.text_field attr, class: 'form-control' %>
+                          <% end %>
+                        </div>
+                      </div>
+                  <% end %>
+              <% end %>
+          <% end %>
+
+          <p class="no-translations" style="display: none">There are no any translation for given criteria</p>
+        </div>
+
+        <hr/>
+        <%= render 'spree/admin/shared/edit_resource_links' %>
+    <% end %>
+  </div>
+</div>
+

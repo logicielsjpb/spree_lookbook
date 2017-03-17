@@ -1,7 +1,23 @@
 
 <div id="accordion">
-  <% cache [I18n.locale, @taxon] do %>
-      <%= taxons_tree(@lookbook.spree_taxon.root, @lookbook.spree_taxon, 4, true) %>
+  <% cache [I18n.locale, @lookbook] do %>
+      <ul class="menu-sidebar">
+        <li class ="first__link">
+          <ul class="menu-sidebar">
+          <% Spree::Taxon.joins(:lookbooks).uniq.each do |t| %>
+                <li class=" second__link"><%= link_to t.name, nested_taxons_path(t) %>
+                  <ul class="menu-sidebar">
+
+                  <% t.lookbooks.each do |l| %>
+                        <li class="third__link"><%= link_to l.name, show_lookbook_path(l.slug)  %></li>
+                  <% end %>
+                  </ul>
+
+                </li>
+
+          <% end %>
+        </li>
+      </ul>
   <% end %>
 </div>
 

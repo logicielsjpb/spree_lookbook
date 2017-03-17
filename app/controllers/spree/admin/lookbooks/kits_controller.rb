@@ -63,6 +63,10 @@ module Spree
           end
         end
 
+        def find_resource
+
+          Spree::Kit.friendly.find(params[:id])
+        end
 
         private
         def model_class
@@ -75,6 +79,11 @@ module Spree
 
         def location_after_save
           edit_admin_lookbook_path(@lookbook)
+        end
+
+        def find_resource
+
+            Spree::Kit.friendly.find(params[:id])
         end
 
       end

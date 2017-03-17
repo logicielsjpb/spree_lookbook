@@ -1,6 +1,8 @@
 Spree::Core::Engine.add_routes do
   get '/inspirez-vous', to: 'lookbooks#show'
-  get '/inspirez-vous/:slug', to: 'lookbooks#show'
+  get '/inspirez-vous/:slug', to: 'lookbooks#show', as: :show_lookbook
+  get '/inspirez-vous/:slug/:kit', to: 'lookbooks#show', as: :show_kit
+
 
   namespace :admin do
     get '/kits/add_product/', to: 'kits#add_product'

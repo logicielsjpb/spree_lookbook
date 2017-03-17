@@ -6,10 +6,17 @@
 
 <% end %>
   <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][spree_product_id]", product.id %>
+  <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][_destroy]", "false", data:{hook: "deleter"} %>
+
   <%= product.product_code %>
 </td>
 <td>
   <%= product.name %>
 
 </td>
+  <td class="actions actions-2 text-right">
+    <% if @lookbook %>
+        <%= link_to_with_icon 'delete', "", "#remove_line", class: "btn btn-danger btn-sm deete-resource" %>
+    <% end %>
+  </td>
 </tr>

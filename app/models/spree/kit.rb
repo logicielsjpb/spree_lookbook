@@ -24,7 +24,7 @@ module Spree
     end
     def image_for product
       skp = spree_kits_products.where(product: product).first
-      if skp.image
+      if skp && skp.image?
          skp.image.url(:product)
       else
         if product.images.empty?

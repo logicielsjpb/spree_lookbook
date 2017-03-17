@@ -9,6 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["alexandre DT"]
   spec.email         = ["alexandredt79@gmail.com"]
 
+  spec.summary       = "lookbooks and kits for spree"
+
   spec.description   = "lookbooks and kits for spree"
   spec.homepage      = "http:://github.com/billybones79/spree_lookbook"
   spec.license       = "MIT"

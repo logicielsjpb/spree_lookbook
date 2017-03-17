@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["alexandredt79@gmail.com"]
 
   spec.description   = "lookbooks and kits for spree"
-  spec.homepage      = "billybones79/spree_lookbook"
+  spec.homepage      = "http:://github.com/billybones79/spree_lookbook"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

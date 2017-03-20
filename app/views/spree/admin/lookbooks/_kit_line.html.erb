@@ -10,7 +10,7 @@
   <td class="handle move-handle"><span class="icon icon-move handle"></span></td>
   <td class="presentation"><%= kit.name %></td>
   <td class="actions actions-2 text-right">
-    <% if @lookbook %>
+    <% if @lookbook && !(defined? no_edit) %>
       <%= link_to_edit(kit.id, class: 'admin_edit_option_type', no_text: true, url: edit_admin_lookbook_kit_path(@lookbook, kit)) %>
         <%= link_to_with_icon 'delete', "", "#remove_line", class: "btn btn-danger btn-sm deete-resource" %>
     <% end %>

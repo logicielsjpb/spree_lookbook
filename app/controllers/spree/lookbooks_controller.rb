@@ -12,7 +12,7 @@ module Spree
     end
 
     def index
-      @lookbooks = Spree::Lookbook.where("spree_taxon_id"=> @taxon.self_and_descendants.pluck(:id) )
+      @lookbooks = Spree::Lookbook.joins(:kits).where("spree_taxon_id"=> @taxon.self_and_descendants.pluck(:id) )
     end
 
     private

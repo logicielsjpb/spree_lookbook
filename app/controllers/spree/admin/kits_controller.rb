@@ -35,7 +35,13 @@ module Spree
 
       def edit
         @kits = Spree::Kit.find(params[:id])
-        end
+      end
+
+      private
+      def find_resource
+
+        Spree::Kit.friendly.find(params[:id])
+      end
 
 
 

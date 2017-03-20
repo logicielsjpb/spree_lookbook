@@ -5,9 +5,9 @@
       <%= render partial: 'spree/shared/taxonomies' %>
     </div>
 
-    <div data-hook="taxon_products" class="content-page products">
-      <%= render partial: 'spree/shared/kit', locals: { products: @products, taxon: @taxon } %>
-    </div>
+    <% @lookbooks.each do |l| %>
+      <%= link_to image_tag(l.image.url(:large)), show_lookbook_path(@taxon, l) %>
+    <% end %>
 
   </div>
 </div>

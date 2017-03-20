@@ -1,7 +1,7 @@
 Spree::Core::Engine.add_routes do
-  get '/inspirez-vous', to: 'lookbooks#show'
-  get '/inspirez-vous/:slug', to: 'lookbooks#show', as: :show_lookbook
-  get '/inspirez-vous/:slug/:kit', to: 'lookbooks#show', as: :show_kit
+  get '/:taxon/inspirez-vous', to: 'lookbooks#index', as: :lookboooks
+  get '/:taxon/inspirez-vous/:slug', to: 'lookbooks#show', as: :show_lookbook
+  get '/:taxon//inspirez-vous/:slug/:kit', to: 'kits#show', as: :show_kit
 
 
   namespace :admin do

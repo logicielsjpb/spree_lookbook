@@ -19,7 +19,7 @@
 </td>
 
   <td>
-    <% if (defined? skp) && skp.image %>
+    <% if (defined? skp) && skp.image? %>
          <%= image_tag skp.image.url(:mini) %>
     <% end %>
     <div class="panel-body">

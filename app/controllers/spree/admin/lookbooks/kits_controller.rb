@@ -83,7 +83,12 @@ module Spree
 
         def find_resource
 
+          if params[:id]
             Spree::Kit.friendly.find(params[:id])
+          else
+            Spree::Kit.friendly.find(params[:kit_id])
+
+          end
         end
 
       end

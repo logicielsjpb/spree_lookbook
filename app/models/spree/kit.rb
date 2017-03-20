@@ -32,7 +32,7 @@ module Spree
           unless product.variants.joins(:images).any?
             return "noimage/product.png"
           end
-          return product.variants.joins(:images).first.images.first.url(:large)
+          return product.variants.joins(:images).first.images.first.attachment.url(:large)
         else
           image = product.images.first
           image.attachment.url(:large)

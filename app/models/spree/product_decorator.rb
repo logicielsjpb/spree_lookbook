@@ -14,9 +14,9 @@ Spree::Product.class_eval do
     tids = self.taxons.where("#{Spree::Taxon.table_name}.taxonomy_id = 2").leaves.pluck(:id)
 
     kit_products = Spree::Product
-                       .joins(:kit)
+                       .joins(:kits)
                        .where('spree_products.id != ?', self.id)
-                       .where('spree_kits.id = ?', Spree::Kit.joins(:product).where('spree_products.id = ?', self.id).offset(rand_kit).pluck(:id)[0]).uniq
+                       .where('spree_kits.id = ?', kits.offset(rand_kit).pluck(:id)[0]).uniq
 
     kit_products.each do |kp|
       to_add = true

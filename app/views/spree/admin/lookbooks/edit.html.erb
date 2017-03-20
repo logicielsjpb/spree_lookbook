@@ -9,7 +9,9 @@
 <%= render 'form', resource: @lookbook %>
 
 <% SpreeI18n::Config.available_locales.each do |locale| %>
-    <img src ="<%= @lookbook.image(locale).url(:large) %>"/>
+    <% if @lookbook.translation_for(locale).image? %>
+      <img src ="<%= @lookbook.image(locale).url(:large) %>"/>
+    <% end %>
 <% end %>
 
 

@@ -25,13 +25,17 @@ module Spree
     def image_for product
       skp = spree_kits_products.where(product: product).first
       if skp && skp.image?
-         skp.image.url(:product)
+         skp.image.url(:large)
       else
         if product.images.empty?
           "noimage/product.png"
+          unless self.variants.joins(:images).any?
+            return "noimage/product.png"
+          end
+          return self.variants.joins(:images).first.images.first.url(:large)
         else
           image = product.images.first
-          image.attachment.url(:product)
+          image.attachment.url(:large)
         end
       end
     end

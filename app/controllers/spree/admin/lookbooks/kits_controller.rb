@@ -49,7 +49,7 @@ module Spree
         end
 
         def update_product_positions
-          @kit = Spree::Kit.find(params[:kit_id])
+          @kit = Spree::Kit.friendly.find(params[:kit_id])
           ActiveRecord::Base.transaction do
             params[:positions].each_with_index do |id, index|
               puts id

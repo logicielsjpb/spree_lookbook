@@ -29,10 +29,10 @@ module Spree
       else
         if product.images.empty?
           "noimage/product.png"
-          unless self.variants.joins(:images).any?
+          unless product.variants.joins(:images).any?
             return "noimage/product.png"
           end
-          return self.variants.joins(:images).first.images.first.url(:large)
+          return product.variants.joins(:images).first.images.first.url(:large)
         else
           image = product.images.first
           image.attachment.url(:large)

@@ -14,7 +14,6 @@ module Spree
       def add_product
         @product = Spree::Product.find(params[:product_id])
 
-        puts ("WTTTTFFFFFFFFFFF")
         puts @product.inspect
         respond_to do |format|
           format.js {}

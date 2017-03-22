@@ -28,7 +28,6 @@ module Spree
          skp.image.url(:large)
       else
         if product.images.empty?
-          "noimage/product.png"
           unless product.variants.joins(:images).any?
             return "noimage/product.png"
           end

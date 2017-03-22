@@ -45,9 +45,7 @@
         <div class ='translationDiv'>
           <%= link_to_with_icon 'translate', nil, admin_translations_path('lookbook', f.object.id), title: Spree.t(:'i18n.translations'), class: 'btn btn-sm btn-primary' %>
         </div>
-    <% end %>
 
-    <% if @lookbook.kits.any? %>
 
         <table class="table sortable" id="listing-kits" data-sortable-link="<%= update_positions_admin_lookbook_kits_path(@lookbook) %>">
           <thead>
@@ -64,4 +62,6 @@
           </tbody>
         </table>
     <% end %>
+    <% end %>
+
 <% end %>

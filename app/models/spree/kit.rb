@@ -13,7 +13,7 @@ module Spree
 
     has_attached_file :image,
 
-                      styles: { mini: '32x32>', normal: '128x128>', large: '1100x467' },
+                      styles: { mini: '32x32>', normal: '128x128>', large: '1500x760' },
                       default_style: :large
     validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 

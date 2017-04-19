@@ -22,19 +22,19 @@ module Spree
     def slug_candidates
       [[:name]]
     end
-    def image_for product
+    def image_for product, format = :large
       skp = spree_kits_products.where(product: product).first
       if skp && skp.image?
-         skp.image.url(:large)
+         skp.image.url(format)
       else
         if product.images.empty?
           unless product.variants.joins(:images).any?
             return "noimage/product.png"
           end
-          return product.variants.joins(:images).first.images.first.attachment.url(:large)
+          return product.variants.joins(:images).first.images.first.attachment.url(format)
         else
           image = product.images.first
-          image.attachment.url(:large)
+          image.attachment.url(format)
         end
       end
     end

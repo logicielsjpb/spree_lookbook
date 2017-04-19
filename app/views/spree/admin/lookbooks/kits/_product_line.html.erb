@@ -19,9 +19,9 @@
 </td>
 
   <td>
-    <% if (defined? skp) && skp.image? %>
-         <%= image_tag skp.image.url(:mini) %>
-    <% end %>
+
+         <%= image_tag skp.kit.image_for( skp.product, :normal) %>
+
     <div class="panel-body">
       <%= file_field_tag "kit[spree_kits_products_attributes][#{line_id}][image]" , class: 'form-control', rows: 4 %>
     </div>

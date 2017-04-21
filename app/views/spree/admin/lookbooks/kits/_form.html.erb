@@ -8,14 +8,11 @@
       <% end %>
     </div>
 
-    <div class="col-md-6">
-          <%= f.label :image, Spree.t('product_rule.choose_products') %> <span class="required">*</span>
-          <%= f.file_field :image %>
-    </div>
+
   </div>
   <div class="row">
 
-      <div class="col-md-12">
+      <div class="col-md-6">
         <%= f.field_container :product_ids, class: ['form-group'] do %>
             <%= f.label :product_ids, Spree.t('product_rule.choose_products') %> <span class="required">*</span>
             <%= hidden_field_tag :product_id, "", class: "product_picker", data: {

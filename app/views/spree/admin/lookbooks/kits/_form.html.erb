@@ -73,7 +73,7 @@
 
         </tr>
         <% @lookbooks_kit.spree_kits_products.each do |skp| %>
-            <% puts skp.product.inspect %>
+            <% next unless skp.product %>
             <%= render "product_line", {product: skp.product, skp: skp} %>
         <% end %>
 

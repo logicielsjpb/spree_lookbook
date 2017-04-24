@@ -1,4 +1,4 @@
-<% if defined? product && product %>
+<% if defined?(product) && product %>
 
     <tr id="<%= spree_dom_id product %>" >
       <% line_id = (defined? skp )? skp : rand(500..500000) %>
@@ -6,7 +6,7 @@
 
 
       <td>
-      <% if defined? skp && skp %>
+      <% if defined?(skp) && skp %>
           <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][id]", skp.id %>
 
     <% end %>
@@ -21,7 +21,7 @@
     </td>
 
       <td>
-        <% if (defined? skp)  %>
+        <% if (defined?(skp) && skp)  %>
             <%= image_tag skp.kit.image_for( skp.product, :normal) %>
         <% end %>
         <div class="panel-body">

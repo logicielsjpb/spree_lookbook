@@ -1,4 +1,4 @@
-Spree::Core::Engine.add_routes do
+Spree::Core::Engine.routes.draw do
   get '/:taxon/inspirez-vous', to: 'lookbooks#index', as: :lookbooks
   get '/:taxon/inspirez-vous/:slug', to: 'lookbooks#show', as: :show_lookbook
   get '/:taxon//inspirez-vous/:slug/:kit', to: 'kits#show', as: :show_kit

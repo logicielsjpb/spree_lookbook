@@ -1,0 +1,49 @@
+<% if @taxon %>
+    <% if Spree::Lookbook.joins(:kits).where("spree_taxon_id"=> @taxon.self_and_descendants.pluck(:id)).any?  %>
+
+
+        <% cache [I18n.locale,"lookbook", @kit] do %>
+            <ul class="menu-sidebar">
+              <li class ="first__link">
+                <div class="title">
+                      <h2><%= raw t("lookbook") %></h2>
+                </div>
+                <ul class="menu-sidebar">
+                  <li class=" second__link">
+
+
+                  <ul class="menu-sidebar">
+
+                  <% @taxon.self_and_descendants.joins(:lookbooks).uniq.each do |t| %>
+
+
+                          <% t.lookbooks.each do |l| %>
+                            <% l.kits.each do |k| %>
+                              <li class="third__link <%= @lookbook == l && @kit == k ? "current" : "" %>" data-kit-li="<%=k.id %>"><%= link_to k.name, show_kit_path(@taxon, l.slug, k.slug)  %></li>
+                            <% end %>
+                        <% end %>
+
+                  <% end %>
+                        </ul>
+
+                        </li>
+
+                </ul>
+              </li>
+            </ul>
+        <% end %>
+
+    <% end %>
+
+
+
+    <div id="accordion">
+      <% cache [I18n.locale, @taxon] do %>
+          <%= taxons_tree(@taxon.root, @taxon, 4) %>
+      <% end %>
+    </div>
+
+<% else %>
+    <%= render partial: 'spree/shared/filters' %>
+<% end %>
+

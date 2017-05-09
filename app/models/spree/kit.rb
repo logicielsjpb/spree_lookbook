@@ -17,6 +17,7 @@ module Spree
     def slug_candidates
       [[:name]]
     end
+
     def image_for product, format = :large
       skp = spree_kits_products.find_by(product: product)
       if skp && skp.image?

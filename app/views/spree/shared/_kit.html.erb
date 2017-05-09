@@ -19,7 +19,7 @@
                 </div>
                 <h3><%= link_to truncate(product.name, :length => 50), url, :class => 'info', :itemprop => "name", :title => product.name %></h3>
 
-                <% if product.on_sale? %>
+                <% if product.respond_to?(:on_sale?) && product.on_sale? %>
                     <div class="price">
                       <span class="old-price"><%= display_original_price(product) %></span>
                       <span class="sale-price"><%= display_price(product) %></span>

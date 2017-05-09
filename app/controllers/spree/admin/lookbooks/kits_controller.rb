@@ -10,26 +10,29 @@ module Spree
           @kits = Spree::Kit.all
         end
 
+        def new
+          @lookbooks_kit = Kit.new
+        end
+
+        def edit
+          @lookbooks_kit = find_resource
+        end
+
         #retourne un js qui pop une ligne dans un tableau
         def add_product
           @product = Spree::Product.find(params[:product_id])
 
-          puts ("WTTTTFFFFFFFFFFF")
-          puts @product.inspect
           respond_to do |format|
             format.js {}
           end
-
-
         end
 
         def load_lookbook
           @lookbook = Lookbook.friendly.find(params[:lookbook_id])
         end
 
-
         def create
-          super
+          @lookbooks_kit = Kit.new(permitted_resource_params)
           @lookbooks_kit.lookbooks << @lookbook
           @lookbooks_kit.save
         end
@@ -37,8 +40,6 @@ module Spree
         def update_positions
           ActiveRecord::Base.transaction do
             params[:positions].each_with_index do |id, index|
-              puts id
-              puts index
               @lookbook.spree_kit_lookbook.find_by(kit_id: id).update(position: index+1)
             end
           end
@@ -52,8 +53,6 @@ module Spree
           @kit = Spree::Kit.friendly.find(params[:kit_id])
           ActiveRecord::Base.transaction do
             params[:positions].each_with_index do |id, index|
-              puts id
-              puts index
               @kit.spree_kits_products.find_by(spree_product_id: id).update(position: index+1)
             end
           end
@@ -64,7 +63,6 @@ module Spree
         end
 
         def find_resource
-
           Spree::Kit.friendly.find(params[:id])
         end
 

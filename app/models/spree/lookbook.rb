@@ -1,5 +1,5 @@
 module Spree
-  class Lookbook < Spree::Base
+  class Lookbook < ActiveRecord::Base
     extend FriendlyId
 
     has_many :images

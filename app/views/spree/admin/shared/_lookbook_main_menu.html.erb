@@ -1,7 +1,3 @@
-<% if can? :admin, Spree::QuestionCategory %>
-  <ul class="nav nav-sidebar">
-    <li class="sidebar-menu-item" >
-      <%= tab Spree.t(:lookbook, scope: :spree_lookbook), icon: 'promotion', url: admin_lookbooks_path %>
-    </li>
-  </ul>
+<% if Spree.user_class && can?(:admin, Spree::Taxonomy) %>
+  <%= tab Spree.t(:lookbook, scope: :spree_lookbook), icon: 'promotion', url: admin_lookbooks_path %>
 <% end %>

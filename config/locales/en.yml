@@ -1,9 +1,9 @@
-fr:
+en:
   spree:
     admin:
       tab:
         LookBook: LookBook
     spree_lookbook:
       lookbook: LookBook
-      add_one: Ajouter un LookBook
-      new_lookbook: Nouveau LookBook
+      add_one: Add a LookBook
+      new_lookbook: New LookBook

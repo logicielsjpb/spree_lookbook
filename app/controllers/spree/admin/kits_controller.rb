@@ -1,8 +1,6 @@
 module Spree
   module Admin
     class KitsController < ResourceController
-
-
       respond_to :js, only: [:add_product]
       respond_to :json
 
@@ -18,19 +16,16 @@ module Spree
         respond_to do |format|
           format.js {}
         end
-
-
       end
 
       def search
          @kits = Spree::Kit.with_translations.where("name like ?", "%"+params[:q][:name_cont]+"%")
-
-        render json: {results: @kits}
+         render json: {results: @kits}
       end
 
       def show
         @kits = Spree::Kit.find(params[:id])
-        end
+      end
 
       def edit
         @kits = Spree::Kit.find(params[:id])
@@ -38,12 +33,8 @@ module Spree
 
       private
       def find_resource
-
         Spree::Kit.friendly.find(params[:id])
       end
-
-
-
     end
   end
 end

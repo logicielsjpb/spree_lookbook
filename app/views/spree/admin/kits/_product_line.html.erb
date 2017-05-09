@@ -8,7 +8,7 @@
   <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][spree_product_id]", product.id %>
   <%= hidden_field_tag "kit[spree_kits_products_attributes][#{line_id}][_destroy]", "false", data:{hook: "deleter"} %>
 
-  <%= product.product_code %>
+  <%= product.master.sku %>
 </td>
 <td>
   <%= product.name %>

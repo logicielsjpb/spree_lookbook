@@ -22,7 +22,7 @@
   <div class="col-md-8">
     <%= form_for [:admin, @lookbook], :html => {:multipart => true}  do |f| %>
         <div id="attr_fields">
-          <% SpreeI18n::Config.available_locales.each do |locale| %>
+          <% SolidusI18n::Config.available_locales.each do |locale| %>
               <%= f.globalize_fields_for locale.to_sym do |g| %>
                   <div class="panel panel-default name <%= locale %>" style="display:<%= 'auto'%>;">
                     <div class="panel-heading">
